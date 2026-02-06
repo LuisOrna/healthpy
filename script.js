@@ -9,7 +9,7 @@ var whatsappMessages = {
 };
 
 // Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     initLanguageSwitcher();
     initWhatsAppButton();
     initContactForm();
@@ -20,13 +20,13 @@ document.addEventListener('DOMContentLoaded', function() {
 function initLanguageSwitcher() {
     var langButtons = document.querySelectorAll('.lang-btn');
 
-    langButtons.forEach(function(btn) {
-        btn.addEventListener('click', function() {
+    langButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
             var lang = this.getAttribute('data-lang');
             setLanguage(lang);
 
             // Update button states
-            langButtons.forEach(function(b) {
+            langButtons.forEach(function (b) {
                 b.classList.remove('active');
             });
             this.classList.add('active');
@@ -40,7 +40,7 @@ function setLanguage(lang) {
 
     var elements = document.querySelectorAll('[data-en]');
 
-    elements.forEach(function(el) {
+    elements.forEach(function (el) {
         var text = el.getAttribute('data-' + lang);
         if (text) {
             // Check element type to set text appropriately
@@ -73,33 +73,73 @@ function updateWhatsAppLink() {
 // Contact form handling
 function initContactForm() {
     var form = document.getElementById('contact-form');
+    var successMessage = document.getElementById('success-message');
+    var formStatus = document.getElementById('form-status');
+    var resetBtn = document.getElementById('reset-form-btn');
 
-    // Standard form submission to FormSubmit.co
-    // The previous code intercepted the submit event to redirect to WhatsApp.
-    // That is now disabled to allow the standard POST request to proceed.
-    
-    /* 
-    form.addEventListener('submit', function(e) {
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        var name = document.getElementById('name').value;
-        var email = document.getElementById('email').value;
-        var message = document.getElementById('message').value;
+        var submitBtn = form.querySelector('.submit-btn');
+        var originalBtnText = submitBtn.textContent;
 
-        // For now, redirect to WhatsApp with the message
-        // In the future, this can be connected to a backend
-        var fullMessage = currentLang === 'en'
-            ? 'Name: ' + name + '\nEmail: ' + email + '\nMessage: ' + message
-            : 'Name: ' + name + '\nE-Mail: ' + email + '\nNachricht: ' + message;
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = currentLang === 'en' ? 'Sending...' : 'Senden...';
+        formStatus.style.display = 'none';
 
-        var whatsappUrl = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(fullMessage);
-        window.open(whatsappUrl, '_blank');
+        // Prepare data for Web3Forms
+        var formData = new FormData(form);
+        var object = Object.fromEntries(formData);
+        var json = JSON.stringify(object);
 
-        // Show confirmation
-        var confirmMsg = currentLang === 'en'
-            ? 'Opening WhatsApp to send your message...'
-            : 'WhatsApp wird geöffnet, um Ihre Nachricht zu senden...';
-        alert(confirmMsg);
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: json
+        })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    // Success
+                    form.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    form.reset();
+                } else {
+                    // Error from API
+                    console.log(response);
+                    formStatus.textContent = json.message || 'Something went wrong. Please try again.';
+                    formStatus.style.color = 'red';
+                    formStatus.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                // Network error
+                console.log(error);
+                formStatus.textContent = 'Something went wrong. Please try again.';
+                formStatus.style.color = 'red';
+                formStatus.style.display = 'block';
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText; // Note: This might need re-translating if lang changed, but simple reset is fine
+
+                // Re-apply current language to button to be safe
+                var langAttr = submitBtn.getAttribute('data-' + currentLang);
+                if (langAttr) submitBtn.textContent = langAttr;
+            });
     });
-    */
+
+    // Reset button handler
+    if (resetBtn) {
+        resetBtn.addEventListener('click', function () {
+            successMessage.style.display = 'none';
+            form.style.display = 'block';
+        });
+    }
 }
