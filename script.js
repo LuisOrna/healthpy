@@ -74,6 +74,11 @@ function updateWhatsAppLink() {
 function initContactForm() {
     var form = document.getElementById('contact-form');
 
+    // Standard form submission to FormSubmit.co
+    // The previous code intercepted the submit event to redirect to WhatsApp.
+    // That is now disabled to allow the standard POST request to proceed.
+    
+    /* 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
@@ -96,4 +101,5 @@ function initContactForm() {
             : 'WhatsApp wird geöffnet, um Ihre Nachricht zu senden...';
         alert(confirmMsg);
     });
+    */
 }
