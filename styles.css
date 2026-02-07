@@ -132,30 +132,29 @@ header {
 /* Language Switcher */
 .lang-switcher {
     display: flex;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    overflow: hidden;
+    gap: 4px;
     margin-left: 10px;
 }
 
 .lang-btn {
     background: transparent;
-    border: none;
-    padding: 5px 10px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    padding: 2px 4px;
     cursor: pointer;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 1.4rem;
+    line-height: 1;
     transition: all 0.3s ease;
+    opacity: 0.5;
 }
 
 .lang-btn.active {
-    background-color: var(--primary-color);
-    color: var(--white);
+    opacity: 1;
+    border-color: var(--secondary-color);
 }
 
 .lang-btn:hover:not(.active) {
-    background-color: #f0f0f0;
+    opacity: 0.8;
 }
 
 /* Hero Section */
