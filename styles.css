@@ -494,10 +494,17 @@ footer {
         }
     }
 
+    .about-content {
+        flex-direction: column;
+        padding: 25px;
+        gap: 25px;
+    }
+
     .about-photo-wrapper {
         flex: 0 0 auto;
-        width: 200px;
-        margin-bottom: 20px;
+        width: 100%;
+        max-width: 220px;
+        margin: 0 auto;
     }
 
     .process-steps {
