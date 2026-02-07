@@ -30,8 +30,11 @@
     box-sizing: border-box;
 }
 
-html {
+html,
+body {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 body {
@@ -132,30 +135,30 @@ header {
 /* Language Switcher */
 .lang-switcher {
     display: flex;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    overflow: hidden;
+    gap: 4px;
     margin-left: 10px;
 }
 
 .lang-btn {
     background: transparent;
-    border: none;
-    padding: 5px 10px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    padding: 4px 6px;
     cursor: pointer;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 0.8rem;
+    line-height: 0;
     transition: all 0.3s ease;
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
 }
 
 .lang-btn.active {
-    background-color: var(--primary-color);
-    color: var(--white);
+    opacity: 1;
+    border-color: var(--secondary-color);
 }
 
 .lang-btn:hover:not(.active) {
-    background-color: #f0f0f0;
+    opacity: 0.8;
 }
 
 /* Hero Section */
@@ -410,8 +413,56 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
+
+    /* Header mobile: 2 rows */
+    .header-content {
+        flex-wrap: wrap;
+        padding: 18px 15px 10px;
+        row-gap: 12px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+        order: 1;
+    }
+
+    .header-right {
+        display: contents;
+    }
+
+    .lang-switcher {
+        order: 2;
+        margin-left: auto;
+        margin-right: 10px;
+    }
+
+    .contact-info {
+        order: 3;
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .phone,
+    .address {
+        font-size: 0.75rem;
+    }
+
+    #hero {
+        background-attachment: scroll;
+        margin-top: 90px;
+    }
+
     #hero h1 {
-        font-size: 2.2rem;
+        font-size: 1.4rem;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+
+    #hero .subtitle {
+        font-size: 1rem;
     }
 
     /* Success Message */
@@ -443,10 +494,17 @@ footer {
         }
     }
 
+    .about-content {
+        flex-direction: column;
+        padding: 25px;
+        gap: 25px;
+    }
+
     .about-photo-wrapper {
         flex: 0 0 auto;
-        width: 200px;
-        margin-bottom: 20px;
+        width: 100%;
+        max-width: 220px;
+        margin: 0 auto;
     }
 
     .process-steps {
