@@ -414,7 +414,8 @@ footer {
     /* Header mobile: 2 rows */
     .header-content {
         flex-wrap: wrap;
-        padding: 8px 15px;
+        padding: 18px 15px 10px;
+        row-gap: 12px;
     }
 
     .logo {
@@ -429,6 +430,7 @@ footer {
     .lang-switcher {
         order: 2;
         margin-left: auto;
+        margin-right: 10px;
     }
 
     .contact-info {
