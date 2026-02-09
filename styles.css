@@ -584,4 +584,17 @@ footer {
     .process-steps {
         flex-direction: column;
     }
+
+    /* Testimonials mobile */
+    .testimonial {
+        padding: 25px;
+    }
+
+    .testimonial blockquote p {
+        font-size: 1rem;
+    }
+
+    .testimonial-carousel {
+        min-height: 280px;
+    }
 }
