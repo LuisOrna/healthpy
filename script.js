@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initLanguageSwitcher();
     initWhatsAppButton();
     initContactForm();
+    initTestimonials();
     setLanguage('en');
 });
 
@@ -142,4 +143,50 @@ function initContactForm() {
             form.style.display = 'block';
         });
     }
+}
+
+// Testimonials carousel
+function initTestimonials() {
+    var testimonials = document.querySelectorAll('.testimonial');
+    var dotsContainer = document.querySelector('.testimonial-dots');
+    var currentIndex = 0;
+    var intervalTime = 6000;
+    var autoPlayTimer;
+
+    if (testimonials.length === 0) return;
+
+    // Create dots
+    testimonials.forEach(function (_, i) {
+        var dot = document.createElement('button');
+        dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Testimonial ' + (i + 1));
+        dot.addEventListener('click', function () {
+            goToSlide(i);
+            resetAutoPlay();
+        });
+        dotsContainer.appendChild(dot);
+    });
+
+    var dots = document.querySelectorAll('.testimonial-dot');
+
+    function goToSlide(index) {
+        testimonials[currentIndex].classList.remove('active');
+        dots[currentIndex].classList.remove('active');
+        currentIndex = index;
+        testimonials[currentIndex].classList.add('active');
+        dots[currentIndex].classList.add('active');
+    }
+
+    function nextSlide() {
+        var next = (currentIndex + 1) % testimonials.length;
+        goToSlide(next);
+    }
+
+    function resetAutoPlay() {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = setInterval(nextSlide, intervalTime);
+    }
+
+    // Start auto-play
+    autoPlayTimer = setInterval(nextSlide, intervalTime);
 }
