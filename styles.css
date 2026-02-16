@@ -354,7 +354,6 @@ header {
 }
 
 .testimonial.active {
-    position: relative;
     opacity: 1;
 }
 

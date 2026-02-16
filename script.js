@@ -175,18 +175,19 @@ function initTestimonials() {
     function setCarouselHeight() {
         var maxHeight = 0;
         testimonials.forEach(function (t) {
-            t.style.position = 'relative';
+            // Temporarily make visible to measure
+            var prevOpacity = t.style.opacity;
             t.style.opacity = '1';
             var h = t.offsetHeight;
             if (h > maxHeight) maxHeight = h;
-            t.style.position = '';
-            t.style.opacity = '';
+            t.style.opacity = prevOpacity;
         });
         carousel.style.minHeight = maxHeight + 'px';
     }
 
     setCarouselHeight();
     window.addEventListener('resize', setCarouselHeight);
+    document.fonts.ready.then(setCarouselHeight);
 
     function goToSlide(index) {
         testimonials[currentIndex].classList.remove('active');
