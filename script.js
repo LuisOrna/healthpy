@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initWhatsAppButton();
     initContactForm();
     initTestimonials();
+    initFAQ();
     setLanguage('en');
 });
 
@@ -189,4 +190,33 @@ function initTestimonials() {
 
     // Start auto-play
     autoPlayTimer = setInterval(nextSlide, intervalTime);
+}
+
+// FAQ Accordion
+function initFAQ() {
+    var faqQuestions = document.querySelectorAll('.faq-question');
+
+    faqQuestions.forEach(function (question) {
+        question.addEventListener('click', function () {
+            var isExpanded = this.getAttribute('aria-expanded') === 'true';
+            var answer = this.nextElementSibling;
+
+            // Close all other FAQs
+            faqQuestions.forEach(function (q) {
+                if (q !== question) {
+                    q.setAttribute('aria-expanded', 'false');
+                    q.nextElementSibling.style.maxHeight = null;
+                }
+            });
+
+            // Toggle current FAQ
+            if (isExpanded) {
+                this.setAttribute('aria-expanded', 'false');
+                answer.style.maxHeight = null;
+            } else {
+                this.setAttribute('aria-expanded', 'true');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            }
+        });
+    });
 }
