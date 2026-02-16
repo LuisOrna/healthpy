@@ -169,6 +169,24 @@ function initTestimonials() {
     });
 
     var dots = document.querySelectorAll('.testimonial-dot');
+    var carousel = document.querySelector('.testimonial-carousel');
+
+    // Set carousel height to tallest testimonial to prevent page jumps
+    function setCarouselHeight() {
+        var maxHeight = 0;
+        testimonials.forEach(function (t) {
+            t.style.position = 'relative';
+            t.style.opacity = '1';
+            var h = t.offsetHeight;
+            if (h > maxHeight) maxHeight = h;
+            t.style.position = '';
+            t.style.opacity = '';
+        });
+        carousel.style.minHeight = maxHeight + 'px';
+    }
+
+    setCarouselHeight();
+    window.addEventListener('resize', setCarouselHeight);
 
     function goToSlide(index) {
         testimonials[currentIndex].classList.remove('active');
