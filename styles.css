@@ -381,19 +381,17 @@ header {
 }
 
 .testimonial-dot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background-color: #ccc;
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
     padding: 0;
 }
 
 .testimonial-dot.active {
-    width: 12px;
-    height: 12px;
     background-color: var(--secondary-color);
 }
 
