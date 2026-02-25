@@ -447,6 +447,22 @@ textarea {
     margin-top: 10px;
 }
 
+.contact-options {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto 40px;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+}
+
+.contact-options li {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
 .contact-divider {
     text-align: center;
     margin: 40px auto;
