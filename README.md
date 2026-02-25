@@ -166,6 +166,8 @@ Professional website for health insurance advisory services targeting German-spe
    - **Behavior:** Only one question open at a time
 
 6. **Contact**
+   - **Calendly widget:** Inline scheduler at top of section (pick a time directly)
+   - **Intro text:** Bilingual prompt with three contact options (Calendly, WhatsApp, form)
    - **Form fields:** Name, Email, Message
    - **Submit action:** Web3Forms processes and emails
    - **Success message:** Displayed after submission
@@ -274,6 +276,13 @@ git push origin feature/new-testimonial
 
 ## 🔌 Third-Party Integrations
 
+### Calendly (Scheduling)
+- **Purpose:** Allow clients to book calls directly
+- **Widget type:** Inline embed (no popup)
+- **Calendar URL:** `calendly.com/orna-luis/luis-orna-advisor`
+- **Placement:** Contact section, above the contact form
+- **Script:** Loaded async from `assets.calendly.com`
+
 ### Web3Forms (Contact Form)
 - **Purpose:** Process contact form submissions
 - **Documentation:** https://web3forms.com/docs
@@ -314,6 +323,9 @@ git push origin feature/new-testimonial
   - Testimonial carousel (auto-rotate every 6s)
   - FAQ accordion (expand/collapse)
   - Form success message
+
+### Third-Party Scripts
+- **Calendly widget:** Loaded async from `assets.calendly.com` — no performance impact on page load
 
 ### Loading Performance
 - **First Contentful Paint:** Target <1.5s
@@ -442,6 +454,10 @@ git push origin feature/new-testimonial
 - ✅ FAQ section added
 - ✅ Testimonials carousel implemented
 - ✅ Responsive design optimized
+
+### February 25, 2026
+- ✅ Calendly inline scheduler added to contact section
+- ✅ Contact section intro text updated with structured bilingual options
 
 ### Future Enhancements
 - [ ] Add Google Analytics
@@ -598,6 +614,6 @@ If someone else works on this project:
 
 ---
 
-**Last updated:** February 7, 2025
+**Last updated:** February 25, 2026
 **Maintained by:** Luis Orna
-**Version:** 1.0.0
+**Version:** 1.1.0
